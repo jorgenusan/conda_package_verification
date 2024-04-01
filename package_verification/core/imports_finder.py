@@ -35,7 +35,6 @@ class ImportsFinder:
 
     def _is_import_a_file(self, imports: list, root_path: Path):
         file_names = [file.stem for file in root_path.rglob("*.py")]
-        print(file_names)
         python_imports = []
         for import_ in imports:
             if import_ not in file_names:
