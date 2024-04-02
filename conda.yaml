@@ -1,0 +1,11 @@
+name: conda_package_verification
+channels:
+  - anaconda
+  - conda-forge
+dependencies:
+  - python=3.9.7
+  - loguru=0.5.3
+  - pyyaml=6.0.1
+  - pip=23.3.1
+  - pip: 
+    - fire==0.4.0
