@@ -24,7 +24,7 @@ class EnvFileManagement:
                     self.txt_file = file
                 else:
                     self.yaml_file = file
-    
+
     def get_txt_dependencies(self) -> dict:
         if not self.txt_file:
             return None
@@ -32,8 +32,8 @@ class EnvFileManagement:
         with open(self.txt_file, "r") as f:
             for line in f.readlines():
                 line = line.strip()
-                if '==' in line:
-                    name, version = line.split('==')
+                if "==" in line:
+                    name, version = line.split("==")
                     dependencies[name] = version
         return dependencies
 
@@ -59,25 +59,45 @@ class EnvFileManagement:
             return
         with open(self.txt_file, "r") as f:
             lines = f.readlines()
-            for package in packages:
-                package_to_add = package["name"] + "==" + package["version"] + "\n"
-                if package_to_add not in lines:
-                    lines.append(package_to_add)
+
+        for package in packages:
+            package_to_add = package["name"] + "==" + package["version"] + "\n"
+            if package_to_add not in lines:
+                lines.append(package_to_add)
+
         with open(self.txt_file, "w") as f:
             f.writelines(lines)
 
-    def update_yaml_file(self, packages: list) -> None:
+    def update_yaml_file(self, conda_packages: list, pip_packages: list) -> None:
         if not self.yaml_file:
             return
         with open(self.yaml_file, "r") as f:
             data = yaml.safe_load(f)
-            for package in packages:
-                if package not in data["dependencies"]:
-                    package_to_add = package["name"] + "=" + package["version"]
-                    if not check_if_dict_in_list(data["dependencies"]):
-                        data["dependencies"].append(package_to_add)
-                    else:
-                        data["dependencies"].insert(-1, package_to_add)
+            data_pip_packages = check_if_dict_in_list(data["dependencies"])
+
+        for package in conda_packages:
+            if package not in data["dependencies"]:
+                package_to_add = package["name"] + "=" + package["version"]
+                if not data_pip_packages:
+                    data["dependencies"].append(package_to_add)
+                else:
+                    data["dependencies"].insert(-1, package_to_add)
+
+        if pip_packages:
+            if not data_pip_packages:
+                data["dependencies"].append(
+                    {
+                        "pip": [
+                            pip_package["name"] + "==" + pip_package["version"]
+                            for pip_package in pip_packages
+                        ]
+                    }
+                )
+            else:
+                for pip_package in pip_packages:
+                    package_to_add = pip_package["name"] + "==" + pip_package["version"]
+                    if package_to_add not in data_pip_packages["pip"]:
+                        data_pip_packages["pip"].append(package_to_add)
 
         with open(self.yaml_file, "w") as f:
             yaml.safe_dump(data, f)

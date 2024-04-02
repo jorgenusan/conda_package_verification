@@ -1,5 +1,7 @@
 import subprocess
+
 import yaml
+
 
 class CondaManagement:
     def check_package(self, package_name):
@@ -31,17 +33,17 @@ class CondaManagement:
     def export_env_dependencies(self, env_name):
         try:
             output = subprocess.check_output(
-                ["conda", "env", "export", "-n", env_name, '--from-history'],
+                ["conda", "env", "export", "-n", env_name, "--from-history"],
                 stderr=subprocess.STDOUT,
             )
             if not output:
                 return None
             output_str = output.decode("utf-8")
             output_dict = yaml.safe_load(output_str)
-            return output_dict["dependencies"]
+            return [item.split("=")[0] for item in output_dict["dependencies"]]
         except subprocess.CalledProcessError:
             return None
-    
+
     def export_pip_dependencies(self, env_name):
         try:
             output = subprocess.check_output(
@@ -52,11 +54,14 @@ class CondaManagement:
                 return None
             output_str = output.decode("utf-8")
             output_dict = yaml.safe_load(output_str)
-            return output_dict["dependencies"][-1]["pip"]
+            return [
+                item.split("=")[0] for item in output_dict["dependencies"][-1]["pip"]
+            ]
         except subprocess.CalledProcessError:
             return None
         except KeyError:
             return None
-        
+
+
 pm = CondaManagement()
 print(pm.export_env_dependencies("conda_package_verification"))
