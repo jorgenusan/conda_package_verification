@@ -24,6 +24,35 @@ class EnvFileManagement:
                     self.txt_file = file
                 else:
                     self.yaml_file = file
+    
+    def get_txt_dependencies(self) -> dict:
+        if not self.txt_file:
+            return None
+        dependencies = {}
+        with open(self.txt_file, "r") as f:
+            for line in f.readlines():
+                line = line.strip()
+                if '==' in line:
+                    name, version = line.split('==')
+                    dependencies[name] = version
+        return dependencies
+
+    def get_yaml_dependencies(self) -> dict:
+        if not self.yaml_file:
+            return None
+        dependencies = {}
+        with open(self.yaml_file, "r") as f:
+            data = yaml.safe_load(f)
+            dict_in_list = check_if_dict_in_list(data["dependencies"])
+            for dependency in data["dependencies"]:
+                if "=" in dependency:
+                    name, version = dependency.split("=")[:2]
+                    dependencies[name] = version
+            if dict_in_list:
+                for pip_dependency in dict_in_list["pip"]:
+                    name, version = pip_dependency.split("==")
+                    dependencies[name] = version
+        return dependencies
 
     def update_txt_file(self, packages: list) -> None:
         if not self.txt_file:
@@ -31,8 +60,8 @@ class EnvFileManagement:
         with open(self.txt_file, "r") as f:
             lines = f.readlines()
             for package in packages:
-                if package not in lines:
-                    package_to_add = package["name"] + "==" + package["version"] + "\n"
+                package_to_add = package["name"] + "==" + package["version"] + "\n"
+                if package_to_add not in lines:
                     lines.append(package_to_add)
         with open(self.txt_file, "w") as f:
             f.writelines(lines)
@@ -55,4 +84,5 @@ class EnvFileManagement:
 
 
 efm = EnvFileManagement()
-efm.find_env_file(Path.cwd())
+efm.find_env_file(Path("/home/jnsantiago/workspace/jorge/conda_package_verification"))
+print(efm.get_yaml_dependencies())
