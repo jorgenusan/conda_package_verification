@@ -51,8 +51,8 @@ It only needs 2 parameters, the file you want to check and the conda environment
 
 For convenience, add it as a hook to your .pre-commit-config.yaml, or if you don't have one, create a new one with this hook.
 
-![alt text](assets/config_hook.png)
+![Config pydepcheck hook](assets/config_hook.png)
 
 With this configuration, every commit you make will check that all dependencies are added.
 
-![alt text](assets/terminal_hook.png)
+![Terminal logs](assets/terminal_hook.png)
