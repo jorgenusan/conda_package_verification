@@ -2,3 +2,4 @@
   name: Conda Package Verification
   entry: conda-package-verification
   language: python
+  always_run: true
