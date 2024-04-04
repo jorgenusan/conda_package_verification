@@ -11,6 +11,7 @@ def main() -> None:
     parser.add_argument(
         "-ce", "--conda_env", type=str, help="Path to the conda environment file"
     )
+    parser.add_argument("files", nargs="*", help="Files to be committed (ignored)")
     args = parser.parse_args()
 
     cpv_cli = CPVCLI(args.env_file, args.conda_env)
