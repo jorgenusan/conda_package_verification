@@ -13,6 +13,8 @@ class ImportsFinder:
             for line in lines:
                 if re.match(r"import ", line):
                     module = line.split()[1]
+                    if "." in module:
+                        module = module.split(".")[-1]
                     imports.append(module)
                 elif re.match(r"from ", line):
                     module = line.split()[1]

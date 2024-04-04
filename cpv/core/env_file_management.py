@@ -1,6 +1,6 @@
 import yaml
 
-from cpv.utils.dicts import check_if_dict_in_list
+from cpv.utils.utils import check_if_dict_in_list
 
 
 class EnvFileManagement:
@@ -75,8 +75,8 @@ class EnvFileManagement:
             data_pip_packages = check_if_dict_in_list(data["dependencies"])
 
         for package in conda_packages:
-            if package not in data["dependencies"]:
-                package_to_add = package["name"] + "=" + package["version"]
+            package_to_add = package["name"] + "=" + package["version"]
+            if package_to_add not in data["dependencies"]:
                 if not data_pip_packages:
                     data["dependencies"].append(package_to_add)
                 else:
