@@ -9,10 +9,10 @@ from cpv.utils.utils import std_modules
 
 
 class CPVCLI:
-    def __init__(self, env_file: str, conda_env: str) -> None:
+    def __init__(self, env_file: str, env_name: str) -> None:
         self._env_file = Path(env_file)
         self._root_path = Path(".")
-        self._conda_manager = CondaManagement(conda_env)
+        self._conda_manager = CondaManagement(env_name)
         self._imports_finder = ImportsFinder()
         self._env_manager = EnvFileManagement()
 
