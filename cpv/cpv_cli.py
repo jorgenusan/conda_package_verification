@@ -32,6 +32,7 @@ class CPVCLI:
         else:
             self._env_manager.yaml_file = self._env_file
             self._update_yaml_file(external_imports)
+        logger.info("Environment file updated successfully \u2713")
 
     def _update_txt_file(self, imports: list) -> None:
         dependencies_to_add = []
