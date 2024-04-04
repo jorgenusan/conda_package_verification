@@ -9,4 +9,4 @@ dependencies:
 - pre-commit==3.7.0
 - pip:
   - fire==0.6.0
-name: conda_package_verification
+name: cpv
