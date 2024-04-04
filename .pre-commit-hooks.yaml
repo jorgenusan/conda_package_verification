@@ -1,5 +1,5 @@
 - id: cpv
-  name: Conda Package Verification
-  entry: conda-package-verification
+  name: CPV
+  entry: cpv
   language: python
   always_run: true

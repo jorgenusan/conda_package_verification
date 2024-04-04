@@ -2,7 +2,7 @@ from pathlib import Path
 
 import yaml
 
-from package_verification.utils.dicts import check_if_dict_in_list
+from cpv.utils.dicts import check_if_dict_in_list
 
 
 class EnvFileManagement:
@@ -101,8 +101,3 @@ class EnvFileManagement:
 
         with open(self.yaml_file, "w") as f:
             yaml.safe_dump(data, f)
-
-
-efm = EnvFileManagement()
-efm.find_env_file(Path("/home/jnsantiago/workspace/jorge/conda_package_verification"))
-print(efm.get_yaml_dependencies())

@@ -2,9 +2,9 @@ from pathlib import Path
 
 import fire
 
-from package_verification.core.conda_management import CondaManagement
-from package_verification.core.env_file_management import EnvFileManagement
-from package_verification.core.imports_finder import ImportsFinder
+from cpv.core.conda_management import CondaManagement
+from cpv.core.env_file_management import EnvFileManagement
+from cpv.core.imports_finder import ImportsFinder
 
 
 def main():

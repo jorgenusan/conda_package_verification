@@ -61,7 +61,3 @@ class CondaManagement:
             return None
         except KeyError:
             return None
-
-
-pm = CondaManagement()
-print(pm.export_env_dependencies("conda_package_verification"))
