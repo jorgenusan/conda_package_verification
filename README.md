@@ -34,7 +34,7 @@ It only needs 2 parameters, the file you want to check and the conda environment
    python setup.py install
    ```
 
-3. Execute the CPV
+3. Execute pydepcheck
 
     ```bash
     python cpv/main.py --env_file [file.txt/file.yaml] --env_name [env_name]
