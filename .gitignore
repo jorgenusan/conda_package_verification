@@ -161,3 +161,7 @@ cython_debug/
 
 # VSCode
 .vscode/
+
+# Env files
+conda.yaml
+requirements.txt
