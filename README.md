@@ -55,4 +55,4 @@ For convenience, add it as a hook to your .pre-commit-config.yaml, or if you don
 
 With this configuration, every commit you make will check that all dependencies are added.
 
-![Terminal logs](assets/terminal_hook.png)
+![Terminal logs](assets/terminal_logs.png)
