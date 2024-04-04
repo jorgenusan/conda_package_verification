@@ -1,6 +1,8 @@
-# CPV
+# PyDepCheck
 
-Conda Package Verification it is a module that automatically updates the `conda.yaml` or ``requirements.txt`` file with the libraries you are using in your code but forgot to add manually to these files.
+## Introduction
+
+**Python Depencencies Check** it is a module that automatically check if the dependencies used in the code appear in the environment file (`conda.yaml` or `requirements.txt`) but forgot to add manually to these files.
 
 In this way, the files with the dependencies are always aligned with the dependencies you are using in the code.
 
@@ -18,7 +20,7 @@ It only needs 2 parameters, the file you want to check and the conda environment
 > [!WARNING]
 > It does not remove unused libraries from your dependency file. It only adds libraries that are not in your dependency file.
 
-### Execute CPV
+### Execute PyDepCheck
 
 1. Conda env
 

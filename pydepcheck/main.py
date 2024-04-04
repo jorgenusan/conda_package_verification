@@ -1,6 +1,6 @@
 import argparse
 
-from cpv.cpv_cli import CPVCLI
+from pydepcheck.cli import CLI
 
 
 def main() -> None:
@@ -12,7 +12,7 @@ def main() -> None:
     parser.add_argument("files", nargs="*", help="Files to be committed (ignored)")
     args = parser.parse_args()
 
-    cpv_cli = CPVCLI(args.env_file, args.env_name)
+    cpv_cli = CLI(args.env_file, args.env_name)
     cpv_cli.run()
 
 

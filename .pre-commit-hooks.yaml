@@ -1,6 +1,6 @@
-- id: cpv
-  name: CPV
-  entry: cpv
+- id: pydepcheck
+  name: PyDepCheck
+  entry: pydepcheck
   language: python
   always_run: true
   pass_filenames: false

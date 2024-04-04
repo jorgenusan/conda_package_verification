@@ -2,13 +2,13 @@ from pathlib import Path
 
 from loguru import logger
 
-from cpv.core.conda_management import CondaManagement
-from cpv.core.env_file_management import EnvFileManagement
-from cpv.core.imports_finder import ImportsFinder
-from cpv.utils.utils import std_modules
+from pydepcheck.core.conda_management import CondaManagement
+from pydepcheck.core.env_file_management import EnvFileManagement
+from pydepcheck.core.imports_finder import ImportsFinder
+from pydepcheck.utils.utils import std_modules
 
 
-class CPVCLI:
+class CLI:
     def __init__(self, env_file: str, env_name: str) -> None:
         self._env_file = Path(env_file)
         self._root_path = Path(".")

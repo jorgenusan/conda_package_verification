@@ -1,6 +1,6 @@
 import yaml
 
-from cpv.utils.utils import check_if_dict_in_list
+from pydepcheck.utils.utils import check_if_dict_in_list
 
 
 class EnvFileManagement:
