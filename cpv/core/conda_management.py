@@ -4,6 +4,9 @@ import yaml
 
 
 class CondaManagement:
+    def __init__(self, env_name: str) -> None:
+        self._env_name = env_name
+
     def check_package(self, package_name):
         try:
             output = subprocess.run(
@@ -15,10 +18,10 @@ class CondaManagement:
         except subprocess.CalledProcessError:
             return False
 
-    def get_package_info(self, package_name, env_name):
+    def get_package_info(self, package_name):
         try:
             output = subprocess.check_output(
-                ["conda", "list", package_name, "-n", env_name],
+                ["conda", "list", package_name, "-n", self._env_name],
                 stderr=subprocess.STDOUT,
             )
             output = output.decode("utf-8")
@@ -30,10 +33,10 @@ class CondaManagement:
         except subprocess.CalledProcessError:
             return None
 
-    def export_env_dependencies(self, env_name):
+    def export_env_dependencies(self):
         try:
             output = subprocess.check_output(
-                ["conda", "env", "export", "-n", env_name, "--from-history"],
+                ["conda", "env", "export", "-n", self._env_name, "--from-history"],
                 stderr=subprocess.STDOUT,
             )
             if not output:
@@ -44,10 +47,10 @@ class CondaManagement:
         except subprocess.CalledProcessError:
             return None
 
-    def export_pip_dependencies(self, env_name):
+    def export_pip_dependencies(self):
         try:
             output = subprocess.check_output(
-                ["conda", "env", "export", "-n", env_name],
+                ["conda", "env", "export", "-n", self._env_name],
                 stderr=subprocess.STDOUT,
             )
             if not output:
