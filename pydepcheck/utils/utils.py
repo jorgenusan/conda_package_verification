@@ -37,7 +37,7 @@ def std_modules() -> list:
     return ret_list
 
 
-def get_file_hash(path: str) -> str:
+def file_hash(path: str) -> str:
     """Get the hash of a file.
 
     Args:
