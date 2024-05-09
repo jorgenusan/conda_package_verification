@@ -1,7 +1,5 @@
 from pathlib import Path
 
-from loguru import logger
-
 from pydepcheck.core.conda_management import CondaManagement
 from pydepcheck.core.env_file_management import EnvFileManagement
 from pydepcheck.core.imports_finder import ImportsFinder
@@ -28,7 +26,6 @@ class CLI:
         ]
         env_file_extension = self._env_file.suffix
 
-        logger.info(f"Updating the environment file {self._env_file}")
         if env_file_extension == ".txt":
             self._env_manager.txt_file = self._env_file
             self._update_txt_file(external_imports)
@@ -38,10 +35,10 @@ class CLI:
 
         final_hash = file_hash(self._env_file)
         if initial_hash != final_hash:
-            logger.info("Environment file updated successfully \u2713")
+            print("Environment file updated successfully \u2713")
             raise SystemExit(1)
         else:
-            logger.info("Environment file is up to date \u2713")
+            print("Environment file is up to date \u2713")
 
     def _update_txt_file(self, imports: list) -> None:
         """Update the txt file with the external dependencies.
@@ -52,7 +49,6 @@ class CLI:
         dependencies_to_add = []
         txt_dependencies = self._env_manager.get_txt_dependencies()
 
-        logger.info("Checking dependencies in the txt file")
         for package in imports:
             if package not in txt_dependencies:
                 package_info = self._conda_manager.get_package_info(package)
@@ -74,7 +70,6 @@ class CLI:
             pip_info = self._conda_manager.get_package_info("pip")
             dependencies_to_add_yaml.append(pip_info)
 
-        logger.info("Checking dependencies in the yaml file")
         pip_packages = []
         for imp in imports:
             package_info = self._conda_manager.get_package_info(imp)
