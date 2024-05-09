@@ -25,7 +25,8 @@ It only needs 2 parameters, the file you want to check and the conda environment
 1. Conda env
 
    ```bash
-   conda create -n [env_name] python=3.9
+   conda create -n pydepcheck python=3.9 -y
+   conda activate pydepcheck
     ```
 
 2. install the repository
@@ -37,7 +38,7 @@ It only needs 2 parameters, the file you want to check and the conda environment
 3. Execute pydepcheck
 
     ```bash
-    python cpv/main.py --env_file [file.txt/file.yaml] --env_name [env_name]
+    python pydepcheck/main.py --env_file [file.txt/file.yaml] --env_name pydepcheck
     ```
 
 ## pre-commit Hook
