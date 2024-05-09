@@ -74,6 +74,9 @@ class EnvFileManagement:
         with open(self._txt_file, "r") as f:
             lines = f.readlines()
 
+        if lines and not lines[-1].endswith("\n"):
+            lines.append("\n")
+
         for package in packages:
             package_to_add = package["name"] + "==" + package["version"] + "\n"
             if package_to_add not in lines:
