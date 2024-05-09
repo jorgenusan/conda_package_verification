@@ -5,7 +5,7 @@ from loguru import logger
 from pydepcheck.core.conda_management import CondaManagement
 from pydepcheck.core.env_file_management import EnvFileManagement
 from pydepcheck.core.imports_finder import ImportsFinder
-from pydepcheck.utils.utils import std_modules
+from pydepcheck.utils.utils import get_file_hash, std_modules
 
 
 class CLI:
@@ -18,6 +18,8 @@ class CLI:
 
     def run(self) -> None:
         """Run the CLI to update the environment file with the external dependencies."""
+        initial_hash = get_file_hash(self._env_file)
+
         imports = self._imports_finder.get_all_imports(self._root_path)
         external_imports = [
             lib
@@ -33,7 +35,13 @@ class CLI:
         else:
             self._env_manager.yaml_file = self._env_file
             self._update_yaml_file(external_imports)
-        logger.info("Environment file updated successfully \u2713")
+
+        final_hash = get_file_hash(self._env_file)
+        if initial_hash != final_hash:
+            logger.info("Environment file updated successfully \u2713")
+            raise SystemExit(1)
+        else:
+            logger.info("Environment file is up to date \u2713")
 
     def _update_txt_file(self, imports: list) -> None:
         """Update the txt file with the external dependencies.
@@ -51,7 +59,6 @@ class CLI:
                 if package_info:
                     dependencies_to_add.append(package_info)
 
-        logger.info(f"Updating {self._env_manager.txt_file} file")
         self._env_manager.update_txt_file(dependencies_to_add)
 
     def _update_yaml_file(self, imports: list) -> None:
@@ -77,5 +84,4 @@ class CLI:
             else:
                 pip_packages.append(package_info)
 
-        logger.info(f"Updating {self._env_manager.yaml_file} file")
         self._env_manager.update_yaml_file(dependencies_to_add_yaml, pip_packages)
