@@ -1,5 +1,5 @@
 - id: pydepcheck
-  name: pydepcheck
+  name: check env dependencies
   entry: pydepcheck
   language: python
   always_run: true
