@@ -28,3 +28,8 @@ repos:
     rev: v3.7.0
     hooks:
       - id: validate_manifest
+  - repo: https://github.com/jorgenusan/pydepcheck.git
+    rev: v0.1.2
+    hooks:
+      - id: pydepcheck
+        args: ['--env-file', 'requirements.txt', '--env-name', 'pydepcheck']
