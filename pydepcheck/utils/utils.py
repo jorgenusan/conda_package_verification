@@ -1,5 +1,7 @@
 import distutils.sysconfig as sysconfig
+import hashlib
 import os
+from pathlib import Path
 
 
 def check_if_dict_in_list(lst):
@@ -19,3 +21,8 @@ def std_modules():
                     os.path.join(top, nm)[len(std_lib) + 1 : -3].replace("\\", ".")
                 )
     return ret_list
+
+
+def get_file_hash(path: str) -> str:
+    data = Path(path).read_bytes()
+    return hashlib.sha256(data).hexdigest()
