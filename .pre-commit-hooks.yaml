@@ -1,5 +1,5 @@
 - id: pydepcheck
-  name: PyDepCheck
+  name: pydepcheck
   entry: pydepcheck
   language: python
   always_run: true
