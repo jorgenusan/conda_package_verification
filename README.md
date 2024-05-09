@@ -56,12 +56,12 @@ For convenience, add it as a hook to your .pre-commit-config.yaml, or if you don
 # .pre-commit-config.yaml
 repos:
   - repo: https://github.com/jorgenusan/pydepcheck.git
-    rev: v0.1.1
+    rev: v0.1.2
     hooks:
       - id: pydepcheck
-        args: ['--env_file', 'conda.yaml', '--env_name', 'pydepcheck']
+        args: ['--env-file', 'conda.yaml', '--env-name', 'pydepcheck']
 ```
 
 With this configuration, every commit you make will check that all dependencies are added.
 
-![Terminal logs](assets/terminal_logs.png)
+![Terminal logs](assets/failed_log.png)
