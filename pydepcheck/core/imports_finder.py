@@ -6,7 +6,15 @@ class ImportsFinder:
     def __init__(self) -> None:
         pass
 
-    def get_imports(self, file):
+    def get_imports(self, file: str) -> list:
+        """Get the imports from a Python file.
+
+        Args:
+            file (str): Path to the Python file.
+
+        Returns:
+            list: List of imports.
+        """
         with open(file, "r") as f:
             lines = f.readlines()
             imports = []
@@ -24,7 +32,15 @@ class ImportsFinder:
 
         return imports
 
-    def get_all_imports(self, root_path: Path):
+    def get_all_imports(self, root_path: Path) -> list:
+        """Get all the imports from all the Python files in a directory.
+
+        Args:
+            root_path (Path): Path to the root directory.
+
+        Returns:
+            list: List of imports.
+        """
         imports = []
         for file in root_path.rglob("*.py"):
             file_imports = self.get_imports(file)
@@ -35,7 +51,16 @@ class ImportsFinder:
         python_imports = self._is_import_a_file(imports, root_path)
         return python_imports
 
-    def _is_import_a_file(self, imports: list, root_path: Path):
+    def _is_import_a_file(self, imports: list, root_path: Path) -> list:
+        """Check if the import is a file in the directory.
+
+        Args:
+            imports (list): List of imports.
+            root_path (Path): Path to the root directory.
+
+        Returns:
+            list: List of imports that are files.
+        """
         file_names = [file.stem for file in root_path.rglob("*.py")]
         python_imports = []
         for import_ in imports:

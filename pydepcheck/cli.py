@@ -17,6 +17,7 @@ class CLI:
         self._env_manager = EnvFileManagement()
 
     def run(self) -> None:
+        """Run the CLI to update the environment file with the external dependencies."""
         imports = self._imports_finder.get_all_imports(self._root_path)
         external_imports = [
             lib
@@ -35,6 +36,11 @@ class CLI:
         logger.info("Environment file updated successfully \u2713")
 
     def _update_txt_file(self, imports: list) -> None:
+        """Update the txt file with the external dependencies.
+
+        Args:
+            imports (list): List of external dependencies.
+        """
         dependencies_to_add = []
         txt_dependencies = self._env_manager.get_txt_dependencies()
 
@@ -49,6 +55,11 @@ class CLI:
         self._env_manager.update_txt_file(dependencies_to_add)
 
     def _update_yaml_file(self, imports: list) -> None:
+        """Update the yaml file with the external dependencies.
+
+        Args:
+            imports (list): List of external dependencies.
+        """
         dependencies_to_add_yaml = []
 
         pip_dependencies = self._conda_manager.export_pip_dependencies()

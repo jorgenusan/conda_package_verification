@@ -25,6 +25,11 @@ class EnvFileManagement:
         self._yaml_file = value
 
     def get_txt_dependencies(self) -> dict:
+        """Get the dependencies from the txt file.
+
+        Returns:
+            dict: Dependencies from the txt file.
+        """
         if not self._txt_file:
             return None
         dependencies = {}
@@ -37,6 +42,11 @@ class EnvFileManagement:
         return dependencies
 
     def get_yaml_dependencies(self) -> dict:
+        """Get the dependencies from the yaml file.
+
+        Returns:
+            dict: Dependencies from the yaml file.
+        """
         if not self._yaml_file:
             return None
         dependencies = {}
@@ -54,6 +64,11 @@ class EnvFileManagement:
         return dependencies
 
     def update_txt_file(self, packages: list) -> None:
+        """Update the txt file with the external dependencies.
+
+        Args:
+            packages (list): List of external dependencies.
+        """
         if not self._txt_file:
             return
         with open(self._txt_file, "r") as f:
@@ -68,6 +83,12 @@ class EnvFileManagement:
             f.writelines(lines)
 
     def update_yaml_file(self, conda_packages: list, pip_packages: list) -> None:
+        """Update the yaml file with the external dependencies.
+
+        Args:
+            conda_packages (list): Conda packages to add.
+            pip_packages (list): Pip packages to add.
+        """
         if not self._yaml_file:
             return
         with open(self._yaml_file, "r") as f:
