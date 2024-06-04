@@ -20,27 +20,6 @@ It only needs 2 parameters, the file you want to check and the conda environment
 > [!WARNING]
 > It does not remove unused libraries from your dependency file. It only adds libraries that are not in your dependency file.
 
-### Execute PyDepCheck
-
-1. Conda env
-
-   ```bash
-   conda create -n pydepcheck python=3.9 -y
-   conda activate pydepcheck
-    ```
-
-2. install the repository
-
-   ```bash
-   python setup.py install
-   ```
-
-3. Execute pydepcheck
-
-    ```bash
-    python pydepcheck/main.py --env_file [file.txt/file.yaml] --env_name pydepcheck
-    ```
-
 ## pre-commit Hook
 
 ### Requirements
@@ -65,3 +44,25 @@ repos:
 With this configuration, every commit you make will check that all dependencies are added.
 
 ![Terminal logs](assets/failed_log.png)
+
+## Run locally
+
+1. Conda env
+
+   ```bash
+   conda create -n pydepcheck python=3.9 -y
+   conda activate pydepcheck
+    ```
+
+2. install the repository
+
+   ```bash
+   python setup.py install
+   ```
+
+3. Execute pydepcheck
+
+    ```bash
+    python pydepcheck/main.py --env_file [file.txt/file.yaml] --env_name pydepcheck
+    ```
+
