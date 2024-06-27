@@ -22,23 +22,21 @@ It only needs 2 parameters, the file you want to check and the conda environment
 
 ## pre-commit Hook
 
-### Requirements
-
-- [pre-commit](https://pre-commit.com/)
-- Python 3.8+
-
-### Quick Start
-
 For convenience, add it as a hook to your .pre-commit-config.yaml, or if you don't have one, create a new one with this hook.
+
+> [!NOTE]
+> Use of **requirements.txt** or **conda.yaml**:<br>
+> `args: ['--env-file', 'requirements.txt', '--env-name', '<env_nzme>']`<br>
+> `args: ['--env-file', 'conda.yaml', '--env-name', '<env_name>']`
 
 ```yaml
 # .pre-commit-config.yaml
 repos:
   - repo: https://github.com/jorgenusan/pydepcheck.git
-    rev: v0.1.2
+    rev: v0.1.3
     hooks:
       - id: pydepcheck
-        args: ['--env-file', 'conda.yaml', '--env-name', 'pydepcheck']
+        args: ['--env-file', 'requirements.txt', '--env-name', 'pydepcheck']
 ```
 
 With this configuration, every commit you make will check that all dependencies are added.
@@ -46,6 +44,13 @@ With this configuration, every commit you make will check that all dependencies 
 ![Terminal logs](assets/failed_log.png)
 
 ## Run locally
+
+### Requirements
+
+- [pre-commit](https://pre-commit.com/)
+- Python 3.8+
+
+### Quick Start
 
 1. Conda env
 
